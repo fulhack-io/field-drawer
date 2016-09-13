@@ -8,9 +8,17 @@ TEMPLATE_LINK = "{\"type\":\"polyline\",\"latLngs\":[{\"lat\":%s,\"lng\":%s},{\"
 
 
 try:
-    parser = argparse.ArgumentParser("Generate draw tools objects.")
+    parser = argparse.ArgumentParser(
+        """Generate draw tools objects.
 
-    parser.add_argument('-a1', '--anchor_1', nargs='+', help="Coordinates to first anchor. must be comma-seperated", required=True)
+
+        Anchor arguments needs to be comma-seperated and quoted. I.E. -a "59.866552,17.666234"
+
+        Portal list file must contain comma-seperated lines.
+
+        """)
+
+    parser.add_argument('-a1', '--anchor_1', nargs='+', help="Coordinates to anchor. Must be comma-seperated", required=True)
     parser.add_argument('-a2', '--anchor_2', nargs='+', help="Coordinates to first anchor. must be comma-seperated")
     parser.add_argument('-l', '--list', nargs='+', help="Path to file with comma-separated coordinates list.", required=True)
     args = parser.parse_args()
