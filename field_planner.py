@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 import argparse
 import sys
-import csv
 
 TEMPLATE_FIELD = "{\"type\":\"polyline\",\"latLngs\":[{\"lat\":%s,\"lng\":%s},{\"lat\":%s,\"lng\":%s},{\"lat\":%s,\"lng\":%s},{\"lat\":%s,\"lng\":%s}],\"color\":\"#a24ac3\"}"
 TEMPLATE_LINK = "{\"type\":\"polyline\",\"latLngs\":[{\"lat\":%s,\"lng\":%s},{\"lat\":%s,\"lng\":%s}],\"color\":\"#a24ac3\"}"
@@ -22,7 +21,7 @@ try:
     parser.add_argument('-a2', '--anchor_2', nargs='+', help="Coordinates to first anchor. must be comma-seperated")
     parser.add_argument('-l', '--list', nargs='+', help="Path to file with comma-separated coordinates list.", required=True)
     args = parser.parse_args()
-except ImportError:
+except Exception:
     sys.exit(1)
 
 
@@ -39,7 +38,6 @@ list = args.list[0]
 class FieldDrawer:
 
     def __init__(self, anchor_1, anchor_2, portal_list):
-        derp = True
         self.portal_list = portal_list
 
     def parse_portal_list(self):
