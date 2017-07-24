@@ -7,8 +7,8 @@ usage: Generate draw tools objects.
         Portal list file must contain comma-separated lines.
 
 
-       [-h] -a1 ANCHOR_1 [ANCHOR_1 ...] [-a2 ANCHOR_2 [ANCHOR_2 ...]] -l LIST
-       [LIST ...]
+       [-h] -a1 ANCHOR_1 [ANCHOR_1 ...] [-a2 ANCHOR_2 [ANCHOR_2 ...]]
+       [-l LIST [LIST ...]] [-t {csv,json} [{csv,json} ...]]
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -18,4 +18,5 @@ optional arguments:
                         Coordinates to first anchor. must be comma-separated
   -l LIST [LIST ...], --list LIST [LIST ...]
                         Path to file with comma-separated coordinates list.
+  -t {csv,json} [{csv,json} ...], --type {csv,json} [{csv,json} ...]
 ```
