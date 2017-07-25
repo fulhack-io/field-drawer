@@ -1,0 +1,5 @@
+.idea
+*.json
+*.txt
+!requirements.txt
+venv

@@ -1,0 +1,46 @@
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+    <title>Field Drawer</title>
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+    <script src="{{ url_for('static', filename='dist/clipboard.min.js') }}"></script>
+
+    <script>
+        window.onload=function() {
+            var clipboard = new Clipboard('.btn');
+        }
+    </script>
+</head>
+<body>
+<div id="container">
+    <div class="title">
+        <h1>Field Drawer</h1>
+    </div>
+    <div id="content">
+        <form method="post" action="{{ url_for('default') }}">
+            <label for="anchor1">Ancor 1 coordinates:</label>
+            <input type="text" name="anchor1" value="{{ request.form['anchor1'] }}"/><br />
+            <label for="anchor2">Ancor 2 coordinates:</label>
+            <input type="text" name="anchor2" value="{{ request.form['anchor2'] }}"/><br />
+            <label for="portal_list">Portal list (Draw Tools Export)</label>
+            <textarea name="portal_list" rows="10" cols="150"/>{{ request.form['portal_list'] }}</textarea><br/><br/>
+            <input type="submit" />
+        </form>
+    </div>
+</div>
+{% if field %}
+<div id="container">
+    <div class="title">
+        <h1>Result</h1>
+    </div>
+
+    <div id="content">
+        <textarea id="result" rows="10" cols="200">{{ field }}</textarea><br/><br/>
+        <button type="button" class="btn" data-clipboard-action="copy" data-clipboard-target="#result">
+            Copy to clipboard
+        </button>
+    </div>
+</div>
+{% endif %}
+
+</body>
+</html>
