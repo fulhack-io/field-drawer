@@ -75,6 +75,9 @@ form label{
     display: block;
     margin-bottom: 5px;
 }
+form input[type=checkbox] + label{
+    display: inline-block;
+}
 form input[type=text]{
     border: 1px solid #aaa;
     border-radius: 2px;
