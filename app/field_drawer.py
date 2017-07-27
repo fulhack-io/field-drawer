@@ -31,30 +31,28 @@ class FieldDrawer:
                                                                                                                 self.anchor_2_lng,
                                                                                                                 self.color)
         for a in portal_list:
-            if a["type"] != "marker":
-                return "Unable to parse portal list. Ensure type is only marker."
+            print(type(a))
+            if a["type"] == "marker":
 
-            try:
-                res += '{{"type":"polyline","latLngs":[{{"lat":{},"lng":{}}},{{"lat":{},"lng":{}}},{{"lat":{},"lng":{}}}],"color":"#{}"}}'.format(self.anchor_1_lat,
-                                                                                                                                                  self.anchor_1_lng,
-                                                                                                                                                  a["latLng"]["lat"],
-                                                                                                                                                  a["latLng"]["lng"],
-                                                                                                                                                  self.anchor_2_lat,
-                                                                                                                                                  self.anchor_2_lng,
-                                                                                                                                                  self.color)
-                if self.include_markers:
-                    res += ',{{"type":"marker","latLng":{{"lat":{},"lng":{}}},"color":"#{}"}}'.format(a["latLng"]["lat"],
-                                                                                                          a["latLng"]["lng"],
-                                                                                                          self.color)
+                try:
+                    res += '{{"type":"polyline","latLngs":[{{"lat":{},"lng":{}}},{{"lat":{},"lng":{}}},{{"lat":{},"lng":{}}}],"color":"#{}"}},\n'.format(self.anchor_1_lat,
+                                                                                                                                                      self.anchor_1_lng,
+                                                                                                                                                      a["latLng"]["lat"],
+                                                                                                                                                      a["latLng"]["lng"],
+                                                                                                                                                      self.anchor_2_lat,
+                                                                                                                                                      self.anchor_2_lng,
+                                                                                                                                                         self.color)
+                    if self.include_markers:
+                        res += '{{"type":"marker","latLng":{{"lat":{},"lng":{}}},"color":"#{}"}},\n'.format(a["latLng"]["lat"],
+                                                                                                           a["latLng"]["lng"],
+                                                                                                           self.color)
 
-            except Exception as e:
-                return "Unable to generate, verify that the following key exist: {}".format(e)
-            if list_cnt != list_len - 1:
-                list_cnt += 1
-                res += ",\n"
+                except Exception as e:
+                    return "Unable to generate, verify that the following key exist: {}".format(e)
 
 
         res += "]"
+        res = res.replace(',\n]',']').replace(',]',']')
         return res
 
     def generate(self):
