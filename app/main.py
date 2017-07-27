@@ -1,7 +1,8 @@
-from flask import Flask, render_template, request, url_for
+from flask import Flask, render_template, request
 from field_drawer import FieldDrawer
 
 app = Flask(__name__)
+
 
 @app.route('/', methods=['GET', 'POST'])
 def default():

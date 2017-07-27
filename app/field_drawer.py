@@ -1,6 +1,4 @@
 #!/usr/bin/env python
-import argparse
-import sys
 import simplejson as json
 
 
@@ -21,38 +19,36 @@ class FieldDrawer:
         except Exception as e:
             return e
 
-        list_cnt = 0
-        list_len = len(portal_list)
-
-
+        # Draw baseline
         res = '[{{"type":"polyline","latLngs":[{{"lat":{},"lng":{}}},{{"lat":{},"lng":{}}}],"color":"#{}"}},\n'.format(self.anchor_1_lat,
-                                                                                                                self.anchor_1_lng,
-                                                                                                                self.anchor_2_lat,
-                                                                                                                self.anchor_2_lng,
-                                                                                                                self.color)
-        for a in portal_list:
-            print(type(a))
-            if a["type"] == "marker":
+                                                                                                                       self.anchor_1_lng,
+                                                                                                                       self.anchor_2_lat,
+                                                                                                                       self.anchor_2_lng,
+                                                                                                                       self.color)
+        # Draw field
+        for portal in portal_list:
+            print(type(portal))
+            if portal["type"] == "marker":
 
                 try:
                     res += '{{"type":"polyline","latLngs":[{{"lat":{},"lng":{}}},{{"lat":{},"lng":{}}},{{"lat":{},"lng":{}}}],"color":"#{}"}},\n'.format(self.anchor_1_lat,
-                                                                                                                                                      self.anchor_1_lng,
-                                                                                                                                                      a["latLng"]["lat"],
-                                                                                                                                                      a["latLng"]["lng"],
-                                                                                                                                                      self.anchor_2_lat,
-                                                                                                                                                      self.anchor_2_lng,
+                                                                                                                                                         self.anchor_1_lng,
+                                                                                                                                                         portal["latLng"]["lat"],
+                                                                                                                                                         portal["latLng"]["lng"],
+                                                                                                                                                         self.anchor_2_lat,
+                                                                                                                                                         self.anchor_2_lng,
                                                                                                                                                          self.color)
+                    # Draw markers
                     if self.include_markers:
-                        res += '{{"type":"marker","latLng":{{"lat":{},"lng":{}}},"color":"#{}"}},\n'.format(a["latLng"]["lat"],
-                                                                                                           a["latLng"]["lng"],
-                                                                                                           self.color)
+                        res += '{{"type":"marker","latLng":{{"lat":{},"lng":{}}},"color":"#{}"}},\n'.format(portal["latLng"]["lat"],
+                                                                                                            portal["latLng"]["lng"],
+                                                                                                            self.color)
 
                 except Exception as e:
                     return "Unable to generate, verify that the following key exist: {}".format(e)
 
-
         res += "]"
-        res = res.replace(',\n]',']').replace(',]',']')
+        res = res.replace(',\n]', ']').replace(',]', ']')
         return res
 
     def generate(self):
