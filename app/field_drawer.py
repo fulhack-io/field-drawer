@@ -25,7 +25,7 @@ class FieldDrawer:
         list_len = len(portal_list)
 
 
-        res = '[{{"type":"polyline","latLngs":[{{"lat":{},"lng":{}}},{{"lat":{},"lng":{}}}],"color":"#{}"}},'.format(self.anchor_1_lat,
+        res = '[{{"type":"polyline","latLngs":[{{"lat":{},"lng":{}}},{{"lat":{},"lng":{}}}],"color":"#{}"}},\n'.format(self.anchor_1_lat,
                                                                                                                 self.anchor_1_lng,
                                                                                                                 self.anchor_2_lat,
                                                                                                                 self.anchor_2_lng,

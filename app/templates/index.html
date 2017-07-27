@@ -31,9 +31,9 @@
     <div id="content">
         <form method="post" action="{{ url_for('default') }}">
             <label for="anchor1">Anchor 1 coordinates:</label>
-            <input type="text" name="anchor1" value="{{ request.form['anchor1'] }}"/><br />
+            <input type="text" name="anchor1" value="{{ request.form['anchor1'] }}" size="30"/><br />
             <label for="anchor2">Anchor 2 coordinates:</label>
-            <input type="text" name="anchor2" value="{{ request.form['anchor2'] }}"/><br />
+            <input type="text" name="anchor2" value="{{ request.form['anchor2'] }}" size="30"/><br />
             <label for="portal_list">Portal list (Draw Tools Export, can only contain markers.)</label>
             <textarea name="portal_list" rows="10" cols="150"/>{{ request.form['portal_list'] }}</textarea><br /><br />
             <label for="draw_color">Color</label>
@@ -54,7 +54,7 @@
     </div>
 
     <div id="content">
-        <textarea id="result" rows="10" cols="200">{{ field }}</textarea><br/><br/>
+        <textarea id="result" rows="15" cols="230">{{ field }}</textarea><br/><br/>
         <button type="button" class="btn" data-clipboard-action="copy" data-clipboard-target="#result">
             Copy to clipboard
         </button>
