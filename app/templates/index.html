@@ -2,7 +2,8 @@
 <head>
     <title>Field Drawer</title>
     <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
-    <script src="{{ url_for('static', filename='dist/clipboard.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='clipboard.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='jscolor.min.js') }}"></script>
     <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon" />
 
 
@@ -34,7 +35,11 @@
             <label for="anchor2">Anchor 2 coordinates:</label>
             <input type="text" name="anchor2" value="{{ request.form['anchor2'] }}"/><br />
             <label for="portal_list">Portal list (Draw Tools Export, can only contain markers.)</label>
-            <textarea name="portal_list" rows="10" cols="150"/>{{ request.form['portal_list'] }}</textarea><br/><br/>
+            <textarea name="portal_list" rows="10" cols="150"/>{{ request.form['portal_list'] }}</textarea><br /><br />
+            <label for="draw_color">Color</label>
+            <input type="text" name="draw_color" class="jscolor" value="{% if request.form['draw_color'] %}{{ request.form['draw_color'] }}{% else %} a24ac3 {% endif %}"><br />
+            <input type="checkbox" name="include_markers" id="include_markers" value="include_markers" {% if request.form['include_markers'] %}checked="checked"{% endif %}"/>
+            <label for="include_markers">Include markers?</label><br/><br/>
             <input type="submit" />
         </form>
         Need help? Contact @handelsvara on Telegram.<br/>
