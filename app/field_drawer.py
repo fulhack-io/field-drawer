@@ -27,7 +27,6 @@ class FieldDrawer:
                                                                                                                        self.color)
         # Draw field
         for portal in portal_list:
-            print(type(portal))
             if portal["type"] == "marker":
 
                 try:
