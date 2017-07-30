@@ -1,0 +1,33 @@
+{% extends "bootstrap/base.html" %}
+{%- block head -%}
+    {%- block styles -%}
+        {{ super() }}
+        <link rel="stylesheet" href="{{url_for('static', filename='css/superhero.min.css')}}">
+        <link rel="stylesheet" href="{{url_for('static', filename='css/featherlight.min.css')}}">
+    {% endblock %}
+
+    {%- block scripts -%}
+        {{ super() }}
+        <script src="{{ url_for('static', filename='js/fd.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/clipboard.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/jscolor.min.js') }}"></script>
+
+    {% endblock %}
+    <title>ingress.fulhack.io - {%- block title -%}{% endblock title %} </title>
+
+{% endblock head %}
+{%- block body -%}
+
+    {%-block navbar %}
+        {{nav.navbar.render(renderer="custom")}}
+    {% endblock navbar %}
+
+
+    {%- block content -%}
+        <div class="container">
+        Contact @handelsvara on Telegram.
+        </div>
+
+    {% endblock content %}
+{% endblock body %}
+

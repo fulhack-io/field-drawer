@@ -27,8 +27,8 @@ class FieldDrawer:
                                                                                                                        self.color)
         # Draw field
         for portal in portal_list:
+            print(portal)
             if portal["type"] == "marker":
-
                 try:
                     res += '{{"type":"polyline","latLngs":[{{"lat":{},"lng":{}}},{{"lat":{},"lng":{}}},{{"lat":{},"lng":{}}}],"color":"#{}"}},\n'.format(self.anchor_1_lat,
                                                                                                                                                          self.anchor_1_lng,

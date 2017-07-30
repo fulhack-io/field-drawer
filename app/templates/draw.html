@@ -1,41 +1,61 @@
 {% extends "bootstrap/base.html" %}
 {% import "bootstrap/wtf.html" as wtf %}
-{%  block head %}
-    {% block styles %}
-        {{super()}}
-        <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap.css')}}">
+{%- block head -%}
+    {%- block styles -%}
+        {{ super() }}
+        <link rel="stylesheet" href="{{url_for('static', filename='css/superhero.min.css')}}">
     {% endblock %}
 
-    {% block scripts %}
-        {{super()}}
-    {% endblock %}
+    {%- block scripts -%}
+        {{ super() }}
+        <script src="{{ url_for('static', filename='js/fd.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/clipboard.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/jscolor.min.js') }}"></script>
 
-    {% block title %}
-        <title>ingress.fulhack.io</title>
-    {% endblock title %}
+    {% endblock %}
+    <title>ingress.fulhack.io - {%- block title -%}{% endblock title %} </title>
+
 {% endblock head %}
+{%- block body -%}
 
-{% block body -%}
-
-    {% block navbar %}
-        
-        <div id="container">
-            {{nav.mynavbar.render()}}
-        </div>
-
+    {%-block navbar %}
+            {{nav.navbar.render(renderer="custom")}}
     {% endblock navbar %}
 
 
-    {% block content %}
+    {%- block content -%}
         <div class="container">
-        <form method="post" action="{{ url_for('index') }}" class="form-horizontal">
-          <fieldset>
-
-            {{ form.csr_token }}
-            {{ wtf.quick_form(form) }}
-            <input type="submit" />
-          </fieldset>
-        </form>
+            <form method="post" action="{{ url_for('index') }}" class="">
+                <fieldset>
+                    {{ form.hidden_tag() }}
+                    {{ wtf.form_errors(form, hiddens="only") }}
+                    {{ wtf.form_field(form.anchor1, placeholder="Anchor 1") }}
+                    {{ wtf.form_field(form.anchor2, placeholder="Anchor 2") }}
+                    {{ wtf.form_field(form.parse_anchors) }}
+                    {{ wtf.form_field(form.include_markers) }}
+                    {{ wtf.form_field(form.portal_list) }}
+                    {{ wtf.form_field(form.draw_color, class="jscolor", value="a24ac3") }}
+                    <input type="submit" class="btn btn-lg btn-primary btn-block" value="Generate"/>
+                </fieldset>
+            </form>
         </div>
+        <div id="myModal" class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Result</h4>
+                    </div>
+                    <div class="modal-body" id="result">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-clipboard-target="#result">Copy</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
     {% endblock content %}
 {% endblock body %}
