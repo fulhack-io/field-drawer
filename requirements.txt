@@ -1,0 +1,6 @@
+flask
+flask-bootstrap
+flask-nav
+flask-wtf
+gunicorn
+simplejson
