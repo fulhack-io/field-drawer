@@ -3,53 +3,80 @@
 {%- block head -%}
     {%- block styles -%}
         {{ super() }}
-        <link rel="stylesheet" href="{{url_for('static', filename='css/solid.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/isotope.css') }}" media="screen" />
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/amoebe.css') }}" media="screen" />
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/custom.css') }}" media="screen" />
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/default.css') }}" media="screen" />
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/font-awesome.min.css') }}" media="screen" />
     {% endblock %}
 
     {%- block scripts -%}
         {{ super() }}
-        <script src="{{ url_for('static', filename='js/fd.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/field-drawer.js') }}"></script>
         <script src="{{ url_for('static', filename='js/clipboard.min.js') }}"></script>
         <script src="{{ url_for('static', filename='js/jscolor.min.js') }}"></script>
-        <script>
-            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-            })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-            ga('create', 'UA-103192759-1', 'auto');
-            ga('send', 'pageview');
-
-        </script>
-
     {% endblock %}
     <title>ingress.fulhack.io - {%- block title -%}{% endblock title %} </title>
 
 {% endblock head %}
 {%- block body -%}
-
-    {%-block navbar %}
-            {{nav.navbar.render(renderer="custom")}}
-    {% endblock navbar %}
-
-
-    {%- block content -%}
+    <section id="header" class="appear"></section>
+    <div class="navbar navbar-fixed-top" role="navigation" data-0="line-height:100px; height:100px; background-color:rgba(0,0,0,0.3);" data-300="line-height:60px; height:60px; background-color:rgba(0,0,0,1);">
         <div class="container">
-            <form method="post" action="{{ url_for('index') }}" class="">
-                <fieldset>
-                    {{ form.hidden_tag() }}
-                    {{ wtf.form_errors(form, hiddens="only") }}
-                    {{ wtf.form_field(form.anchor1, placeholder="Anchor 1") }}
-                    {{ wtf.form_field(form.anchor2, placeholder="Anchor 2") }}
-                    {{ wtf.form_field(form.parse_anchors) }}
-                    {{ wtf.form_field(form.include_markers) }}
-                    {{ wtf.form_field(form.portal_list) }}
-                    {{ wtf.form_field(form.draw_color, class="jscolor", value="a24ac3") }}
-                    <input type="submit" class="btn btn-lg btn-primary btn-block" value="Generate"/>
-                </fieldset>
-            </form>
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="fa fa-bars color-white"></span>
+                </button>
+                <h1><a class="navbar-brand" href="/" data-0="line-height:90px;" data-300="line-height:50px;">INGRESS.FULHACK.IO
+                </a></h1>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav" data-0="margin-top:20px;" data-300="margin-top:5px;">
+                    <li><a href="#section-draw">Draw</a></li>
+                    <li><a href="#section-contact">Contact</a></li>
+                </ul>
+            </div><!--/.navbar-collapse -->
         </div>
-        <div id="myModal" class="modal fade" tabindex="-1" role="dialog">
+    </div>
+
+
+    <section class="featured appear clearfix" id="section-draw">
+        <div class="container">
+            <div class="row mar-bot40">
+                <div class="col-md-offset-3 col-md-6">
+                    <div class="section-header">
+                        <p>
+                            Easier creation of IITC Draw Tools items.
+                            <br> Either provide Anchor 1 and 2 coordinates, or parse it from the first polyline value.
+                            The portal list must be a Draw Tools export container markers of portals ot use.
+
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <div class="cform" id="draw-form">
+                        <form method="post" action="{{ url_for('index') }}" class="drawForm">
+                            <fieldset>
+                                {{ form.hidden_tag() }}
+                                {{ wtf.form_errors(form, hiddens="only") }}
+                                {{ wtf.form_field(form.anchor1) }}
+                                {{ wtf.form_field(form.anchor2) }}
+                                {{ wtf.form_field(form.parse_anchors) }}
+                                {{ wtf.form_field(form.include_markers) }}
+                                {{ wtf.form_field(form.portal_list) }}
+                                {{ wtf.form_field(form.draw_color, class="jscolor", value="C3545F") }}
+                                <input type="submit" class="btn btn-lg btn-primary btn-block" value="Generate"/>
+                            </fieldset>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="result-modal" class="modal fade" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -67,5 +94,67 @@
             </div>
         </div>
 
-    {% endblock content %}
-{% endblock body %}
+    </section>
+    <section class="section appear clearfix" id="section-contact">
+        <div class="row mar-bot40">
+            <div class="col-md-offset-3 col-md-6">
+                <div class="section-header">
+                    <h2 class="section-heading animated" data-animation="bounceInUp">Contact</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="cform" id="contact-form">
+                    <div class="align-center">
+                        <h2 class="slogan"> @handelsvara on Telegram.
+                        </h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="footer" class="section footer">
+        <div class="container">
+            <div class="container">
+                <div class="row animated opacity mar-bot20" data-andown="fadeIn" data-animation="animation">
+                    <div class="col-sm-12 align-center">
+                        <ul class="social-network social-circle">
+                            <li><a href="https://telegram.me/handelsvara" target="_blank" class="icoRss" title="Telegram"><i class="fa fa-telegram"></i></a></li>
+                            <li><a href="https://github.com/fulhack-io/field-drawer" target="_blank" class="icoGithub" title="Github"><i class="fa fa-github"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="row align-center copyright">
+                    <div class="col-sm-12"><p>Copyright &copy; Amoeba</p>
+                        <div class="credits">
+                            <!--
+                                All the links in the footer should remain intact.
+                                You can delete the links only if you purchased the pro version.
+                                Licensing information: https://bootstrapmade.com/license/
+                                Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=Amoeba
+                            -->
+                            <a href="https://bootstrapmade.com/">Bootstrap Themes</a> by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <a href="#header" class="scrollup"><i class="fa fa-chevron-up"></i></a>
+    <script src="/static/js/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+    <script src="/static/js/jquery.easing.1.3.js"></script>
+    <script src="/static/js/jquery.isotope.min.js"></script>
+    <script src="/static/js/jquery.nicescroll.min.js"></script>
+    <script src="/static/js/fancybox/jquery.fancybox.pack.js"></script>
+    <script src="/static/js/skrollr.min.js"></script>
+    <script src="/static/js/jquery.scrollTo-1.4.3.1-min.js"></script>
+    <script src="/static/js/jquery.localscroll-1.2.7-min.js"></script>
+    <script src="/static/js/stellar.js"></script>
+    <script src="/static/js/jquery.appear.js"></script>
+    <script src="/static/js/main.js"></script>
+    {%- block content -%}
+    {%- endblock content -%}
+{%- endblock body -%}

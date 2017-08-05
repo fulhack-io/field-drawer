@@ -7,7 +7,7 @@ $(document).ready(function() {
             data: $('form').serialize(), // serializes the form's elements.
             success: function (data) {
                 $("#result").text(data.result),
-                $('#myModal').modal('show'),
+                $('#result-modal').modal('show'),
                 $("#anchor1").val(data.anchor1);
                 $("#anchor2").val(data.anchor2);
             },
@@ -26,5 +26,5 @@ $(document).ready(function() {
         }
     });
     var clipboard = new Clipboard('.btn');
-});
 
+});
