@@ -4,7 +4,7 @@
     {%- block styles -%}
         {{ super() }}
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/isotope.css') }}" media="screen" />
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/amoebe.css') }}" media="screen" />
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/amoeba.css') }}" media="screen" />
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/custom.css') }}" media="screen" />
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/default.css') }}" media="screen" />
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/font-awesome.min.css') }}" media="screen" />
@@ -54,7 +54,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <div class="row" id="section-draw">
                 <div class="col-md-8 col-md-offset-2">
                     <div class="cform" id="draw-form">
                         <form method="post" action="{{ url_for('index') }}" class="drawForm">
@@ -67,7 +67,7 @@
                                 {{ wtf.form_field(form.include_markers) }}
                                 {{ wtf.form_field(form.portal_list) }}
                                 {{ wtf.form_field(form.draw_color, class="jscolor", value="C3545F") }}
-                                <input type="submit" class="btn btn-lg btn-primary btn-block" value="Generate"/>
+                                <input type="submit" class="btn btn-lg btn-primary" value="Generate"/>
                             </fieldset>
                         </form>
 
@@ -95,23 +95,18 @@
         </div>
 
     </section>
-    <section class="section appear clearfix" id="section-contact">
-        <div class="row mar-bot40">
-            <div class="col-md-offset-3 col-md-6">
-                <div class="section-header">
-                    <h2 class="section-heading animated" data-animation="bounceInUp">Contact</h2>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <div class="cform" id="contact-form">
-                    <div class="align-center">
-                        <h2 class="slogan"> @handelsvara on Telegram.
-                        </h2>
+    <section id="section-contact" class="section appear clearfix">
+        <div class="container">
+
+            <div class="row mar-bot40">
+                <div class="col-md-offset-3 col-md-6">
+                    <div class="section-header">
+                        <h2 class="section-heading animated" data-animation="bounceInUp">Need help?</h2>
+                        <p>Write to <a href="http://telegram.me/handelsvara" target="_blank">@handelsvara</a> on Telegram.</p>
                     </div>
                 </div>
             </div>
+
         </div>
     </section>
 
