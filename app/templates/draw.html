@@ -1,6 +1,15 @@
 {% extends "bootstrap/base.html" %}
 {% import "bootstrap/wtf.html" as wtf %}
 {%- block head -%}
+    {%- block metas %}
+        <meta charset="UTF-8">
+        <meta name="description" content="Ingres IITC Draw Tools Field Drawer">
+        <meta name="keywords" content="ingress,iitc,draw-tools">
+        <meta name="author" content="klippo">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {%- endblock metas %}
+    <title>ingress.fulhack.io</title>
+
     {%- block styles -%}
         {{ super() }}
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/isotope.css') }}" media="screen" />
@@ -16,7 +25,6 @@
         <script src="{{ url_for('static', filename='js/clipboard.min.js') }}"></script>
         <script src="{{ url_for('static', filename='js/jscolor.min.js') }}"></script>
     {% endblock %}
-    <title>ingress.fulhack.io</title>
 
 {% endblock head %}
 {%- block body -%}
@@ -123,7 +131,7 @@
                 </div>
 
                 <div class="row align-center copyright">
-                    <div class="col-sm-12"><p>Copyright &copy; Amoeba</p>
+                    <div class="col-sm-12"><p>Copyright ?</p>
                         <div class="credits">
                             <!--
                                 All the links in the footer should remain intact.
