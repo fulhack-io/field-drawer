@@ -62,45 +62,59 @@
                     </div>
                 </div>
             </div>
-            <div class="row" id="section-draw">
-                <div class="col-md-10 col-md-offset-1">
-                    <div class="cform" id="draw-form">
-                        <form method="post" action="{{ url_for('index') }}" class="drawForm">
-                            <fieldset>
-                                {{ form.hidden_tag() }}
-                                {{ wtf.form_errors(form, hiddens="only") }}
-                                {{ wtf.form_field(form.anchor1) }}
-                                {{ wtf.form_field(form.anchor2) }}
-                                {{ wtf.form_field(form.parse_anchors) }}
-                                {{ wtf.form_field(form.include_markers) }}
-                                {{ wtf.form_field(form.include_all_polylines) }}
-                                {{ wtf.form_field(form.generate_markers) }}
-                                {{ wtf.form_field(form.draw_tools_export) }}
-                                {{ wtf.form_field(form.draw_color, class="jscolor", value="C3545F") }}
-                                <input type="submit" class="btn btn-lg btn-primary" value="Generate"/>
-                            </fieldset>
-                        </form>
+            <div class="cform" id="draw-form">
 
-                    </div>
-                </div>
+                <form method="post" action="{{ url_for('index') }}" class="drawForm">
+                    <fieldset>
+                            {{ form.hidden_tag() }}
+                            {{ wtf.form_errors(form, hiddens="only") }}
+                            <div class="form-inline row">
+                                <div class="form-group col-md-6">
+                                    {{ form.anchor1.label }}
+                                    {{ form.anchor1(class="form-control") }}
+                                </div>
+                                <div class="form-group col-md-6">
+                                    {{ form.anchor2.label }}
+                                    {{ form.anchor2(class="form-control") }}
+                                </div>
+                            </div>
+                            {{ wtf.form_field(form.parse_anchors) }}
+                            {{ wtf.form_field(form.include_markers) }}
+                            {{ wtf.form_field(form.include_all_polylines) }}
+                            {{ wtf.form_field(form.generate_markers) }}
+                            {{ wtf.form_field(form.draw_tools_export) }}
+                            <div class="form-inline row">
+                                <div class="form-group col-md-6">
+                                    {{ form.polyline_color.label }}
+                                    {{ form.polyline_color(class="form-control jscolor", value="C3545f") }}
+                                </div>
+                                <div class="form-group col-md-6">
+
+                                    {{ form.marker_color.label }}
+                                    {{ form.marker_color(class="form-control jscolor ", value="916BC3") }}
+                                </div>
+                            </div>
+
+                            <input type="submit" class="btn btn-lg btn-primary" value="Generate"/>
+                    </fieldset>
+                </form>
             </div>
-        </div>
+            <div id="result-modal" class="modal fade" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Result</h4>
+                        </div>
+                        <div class="modal-body" id="result">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-clipboard-target="#result">Copy</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
 
-        <div id="result-modal" class="modal fade" tabindex="-1" role="dialog">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Result</h4>
-                    </div>
-                    <div class="modal-body" id="result">
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-clipboard-target="#result">Copy</button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </div>
                 </div>
-
             </div>
         </div>
 
@@ -133,18 +147,18 @@
                 </div>
 
                 <div class="row align-center copyright">
-                        <div class="credits">
-                            <!--
-                                All the links in the footer should remain intact.
-                                You can delete the links only if you purchased the pro version.
-                                Licensing information: https://bootstrapmade.com/license/
-                                Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=Amoeba
-                            -->
-                            <a href="https://bootstrapmade.com/">Bootstrap Themes</a> by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-                        </div>
+                    <div class="credits">
+                        <!--
+                            All the links in the footer should remain intact.
+                            You can delete the links only if you purchased the pro version.
+                            Licensing information: https://bootstrapmade.com/license/
+                            Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=Amoeba
+                        -->
+                        <a href="https://bootstrapmade.com/">Bootstrap Themes</a> by <a href="https://bootstrapmade.com/">BootstrapMade</a>
                     </div>
                 </div>
             </div>
+        </div>
         </div>
     </section>
     <a href="#header" class="scrollup"><i class="fa fa-chevron-up"></i></a>

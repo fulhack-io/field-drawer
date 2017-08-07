@@ -9,8 +9,9 @@ class DrawForm(FlaskForm):
                                       validators=[DataRequired()],
                                       render_kw={"rows": 10, "cols": 100}
                                       )
-    include_markers = BooleanField(u'Include Markers from export.', validators=[Optional()])
-    generate_markers= BooleanField(u'Generate missing markers from export.', validators=[Optional()])
-    include_all_polylines = BooleanField(u'Include all polyliens from export.', validators=[Optional()])
-    parse_anchors = BooleanField(u'Parse anchors from export (Requires first polyline to be the baseline.)')
-    draw_color = StringField('Draw color')
+    include_markers = BooleanField(u'Include Markers from export', validators=[Optional()])
+    generate_markers= BooleanField(u'Generate markers from export (Adds a marker parsed from the second index of latLngs)', validators=[Optional()])
+    include_all_polylines = BooleanField(u'Include all polylines from export', validators=[Optional()])
+    parse_anchors = BooleanField(u'Attempt to parse anchors from export (Requires first polyline to be the baseline)')
+    polyline_color = StringField('Polyline color')
+    marker_color = StringField('Marker color')
