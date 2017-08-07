@@ -4,13 +4,14 @@ import simplejson as json
 
 class FieldDrawer:
 
-    def __init__(self, a1, a2, portal_list_f, include_markers, include_all_polylines, draw_color):
-        self.portal_list_f = portal_list_f
+    def __init__(self, a1, a2, draw_tools_export, include_markers, generate_markers, include_all_polylines, draw_color):
+        self.portal_list_f = draw_tools_export
         self.anchor_1_lat = a1.split(',')[0]
         self.anchor_1_lng = a1.split(',')[1]
         self.anchor_2_lat = a2.split(',')[0]
         self.anchor_2_lng = a2.split(',')[1]
         self.include_markers = include_markers
+        self.generate_markers = generate_markers
         self.include_all_polylines = include_all_polylines
         self.color = draw_color
 
@@ -45,8 +46,21 @@ class FieldDrawer:
 
                 except Exception as e:
                     return "Unable to generate, verify that the following key exist: {}".format(e)
-            elif portal["type"] == "polyline" and self.include_all_polylines:
-                res += str(portal).replace(' ', '').replace('\'', '"') + ',\n'
+
+            elif portal["type"] == "polyline":
+                if self.include_all_polylines:
+                    if len(portal["latLngs"]) == 2:
+                        if float(portal["latLngs"][0]["lat"]) == float(self.anchor_1_lat) and float(portal["latLngs"][0]["lng"]) == float(self.anchor_1_lng):
+                            pass
+                        else:
+                            res += str(portal).replace(' ', '').replace('\'', '"') + ',\n'
+                    else:
+                        res += str(portal).replace(' ', '').replace('\'', '"') + ',\n'
+
+                if self.generate_markers and len(portal["latLngs"]) == 3:
+                    res += '{{"type":"marker","latLng":{{"lat":{},"lng":{}}},"color":"#{}"}},\n'.format(portal["latLngs"][1]["lat"],
+                                                                                                        portal["latLngs"][1]["lng"],
+                                                                                                        self.color)
 
         res += "]"
         res = res.replace(',\n]', ']').replace(',]', ']')

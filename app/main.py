@@ -24,23 +24,24 @@ def draw():
     if request.method == 'POST':
         parse_anchors = 'parse_anchors' in request.form
         include_markers = 'include_markers' in request.form
+        generate_markers = 'generate_markers' in request.form
         include_all_polylines = 'include_all_polylines' in request.form
 
-        portal_list = request.form['portal_list']
+        draw_tools_export = request.form['draw_tools_export']
         draw_color = request.form['draw_color']
 
         anchor1 = request.form['anchor1']
         anchor2 = request.form['anchor2']
 
         if anchor1 == '' or anchor2 == '' or parse_anchors:
-            for portal in json.loads(portal_list):
+            for portal in json.loads(draw_tools_export):
                 if portal["type"] == "polyline":
                     anchor1 = '{},{}'.format(portal["latLngs"][0]['lat'], portal["latLngs"][0]['lng'])
                     anchor2 = '{},{}'.format(portal["latLngs"][1]['lat'], portal["latLngs"][1]['lng'])
                     break
             parse_anchors = True
 
-        field = FieldDrawer(anchor1, anchor2, portal_list, include_markers, include_all_polylines, draw_color).generate()
+        field = FieldDrawer(anchor1, anchor2, draw_tools_export, include_markers, generate_markers, include_all_polylines, draw_color).generate()
         return jsonify(result=field, anchor1=anchor1, anchor2=anchor2, parse_anchors=parse_anchors)
 
 
