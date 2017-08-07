@@ -73,6 +73,7 @@
                                 {{ wtf.form_field(form.anchor2) }}
                                 {{ wtf.form_field(form.parse_anchors) }}
                                 {{ wtf.form_field(form.include_markers) }}
+                                {{ wtf.form_field(form.include_all_polylines) }}
                                 {{ wtf.form_field(form.portal_list) }}
                                 {{ wtf.form_field(form.draw_color, class="jscolor", value="C3545F") }}
                                 <input type="submit" class="btn btn-lg btn-primary" value="Generate"/>
@@ -131,7 +132,6 @@
                 </div>
 
                 <div class="row align-center copyright">
-                    <div class="col-sm-12"><p>Copyright ?</p>
                         <div class="credits">
                             <!--
                                 All the links in the footer should remain intact.

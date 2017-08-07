@@ -4,13 +4,14 @@ import simplejson as json
 
 class FieldDrawer:
 
-    def __init__(self, a1, a2, portal_list_f, include_markers, draw_color):
+    def __init__(self, a1, a2, portal_list_f, include_markers, include_all_polylines, draw_color):
         self.portal_list_f = portal_list_f
         self.anchor_1_lat = a1.split(',')[0]
         self.anchor_1_lng = a1.split(',')[1]
         self.anchor_2_lat = a2.split(',')[0]
         self.anchor_2_lng = a2.split(',')[1]
         self.include_markers = include_markers
+        self.include_all_polylines = include_all_polylines
         self.color = draw_color
 
     def parse_portal_list_json(self):
@@ -27,7 +28,6 @@ class FieldDrawer:
                                                                                                                        self.color)
         # Draw field
         for portal in portal_list:
-            print(portal)
             if portal["type"] == "marker":
                 try:
                     res += '{{"type":"polyline","latLngs":[{{"lat":{},"lng":{}}},{{"lat":{},"lng":{}}},{{"lat":{},"lng":{}}}],"color":"#{}"}},\n'.format(self.anchor_1_lat,
@@ -45,6 +45,8 @@ class FieldDrawer:
 
                 except Exception as e:
                     return "Unable to generate, verify that the following key exist: {}".format(e)
+            elif portal["type"] == "polyline" and self.include_all_polylines:
+                res += str(portal).replace(' ', '').replace('\'', '"') + ',\n'
 
         res += "]"
         res = res.replace(',\n]', ']').replace(',]', ']')

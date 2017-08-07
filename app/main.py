@@ -22,10 +22,9 @@ def index():
 @app.route('/draw', methods=['POST'])
 def draw():
     if request.method == 'POST':
-        print(request.form)
-
         parse_anchors = 'parse_anchors' in request.form
         include_markers = 'include_markers' in request.form
+        include_all_polylines = 'include_all_polylines' in request.form
 
         portal_list = request.form['portal_list']
         draw_color = request.form['draw_color']
@@ -41,7 +40,7 @@ def draw():
                     break
             parse_anchors = True
 
-        field = FieldDrawer(anchor1, anchor2, portal_list, include_markers, draw_color).generate()
+        field = FieldDrawer(anchor1, anchor2, portal_list, include_markers, include_all_polylines, draw_color).generate()
         return jsonify(result=field, anchor1=anchor1, anchor2=anchor2, parse_anchors=parse_anchors)
 
 
