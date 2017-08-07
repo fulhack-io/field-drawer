@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import simplejson as json
+import ast
 
 
 class FieldDrawer:
@@ -51,13 +52,7 @@ class FieldDrawer:
 
             elif portal["type"] == "polyline":
                 if self.include_all_polylines:
-                    if len(portal["latLngs"]) == 2:
-                        if float(portal["latLngs"][0]["lat"]) == float(self.anchor_1_lat) and float(portal["latLngs"][0]["lng"]) == float(self.anchor_1_lng):
-                            pass
-                        else:
-                            res += str(portal).replace(' ', '').replace('\'', '"') + ',\n'
-                    else:
-                        res += str(portal).replace(' ', '').replace('\'', '"') + ',\n'
+                    res += str(portal).replace(' ', '').replace('\'', '"') + ',\n'
 
                 if self.generate_markers and len(portal["latLngs"]) == 3:
                     res += '{{"type":"marker","latLng":{{"lat":{},"lng":{}}},"color":"#{}"}},\n'.format(portal["latLngs"][1]["lat"],
@@ -66,8 +61,13 @@ class FieldDrawer:
 
         res += "]"
         res = res.replace(',\n]', ']').replace(',]', ']')
-        print(type(res))
-        return res
+        res = ast.literal_eval(res)
+        new_res = []
+        for item in res:
+            if item not in new_res:
+                new_res.append(item)
+
+        return str(new_res).replace(' ', '').replace('\'', '"')
 
     def generate(self):
         return self.parse_portal_list_json()
