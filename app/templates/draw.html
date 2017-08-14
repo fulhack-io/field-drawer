@@ -63,10 +63,19 @@
                 </div>
             </div>
             <div class="cform" id="draw-form">
+                {% for field in form.errors %}
+                    {% for error in form.errors[field] %}
+                        <div class="alert alert-error">
+                            <strong>Error!</strong> {{error}}
+                        </div>
+                    {% endfor %}
+                {% endfor %}
 
                 <form method="post" action="{{ url_for('index') }}" class="drawForm">
+                {{ form.csrf_token }}
                     <fieldset>
                             {{ form.hidden_tag() }}
+
                             {{ wtf.form_errors(form, hiddens="only") }}
                             <div class="form-inline row">
                                 <div class="form-group col-md-6">
@@ -99,6 +108,12 @@
                     </fieldset>
                 </form>
             </div>
+        <br/>
+            <div id="history">
+                <span></span>
+
+            </div>
+
             <div id="result-modal" class="modal fade" tabindex="-1" role="dialog">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
@@ -117,7 +132,6 @@
                 </div>
             </div>
         </div>
-
     </section>
     <section id="section-contact" class="section appear clearfix">
         <div class="container">
@@ -130,7 +144,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </section>
 

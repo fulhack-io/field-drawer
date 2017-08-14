@@ -1,9 +1,11 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, TextAreaField, BooleanField
-from wtforms.validators import DataRequired, Optional
+from wtforms.validators import DataRequired, Optional, NumberRange, ValidationError
+
 
 class DrawForm(FlaskForm):
     anchor1 = StringField('Anchor 1', validators=[Optional()])
+
     anchor2 = StringField('Anchor 2', validators=[Optional()])
     draw_tools_export = TextAreaField(u'Draw Tools export. (Can contain markers and polyline)',
                                       validators=[DataRequired()],
@@ -15,3 +17,4 @@ class DrawForm(FlaskForm):
     parse_anchors = BooleanField(u'Attempt to parse anchors from export (Requires first polyline to be the baseline)')
     polyline_color = StringField('Polyline color')
     marker_color = StringField('Marker color')
+

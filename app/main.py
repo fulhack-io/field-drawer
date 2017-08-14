@@ -22,17 +22,19 @@ def index():
 @app.route('/draw', methods=['POST'])
 def draw():
     if request.method == 'POST':
-        parse_anchors = 'parse_anchors' in request.form
-        include_markers = 'include_markers' in request.form
-        generate_markers = 'generate_markers' in request.form
-        include_all_polylines = 'include_all_polylines' in request.form
-
-        draw_tools_export = request.form['draw_tools_export']
-        polyline_color = request.form['polyline_color']
-        marker_color = request.form['marker_color']
 
         anchor1 = request.form['anchor1']
         anchor2 = request.form['anchor2']
+
+        draw_tools_export = request.form['draw_tools_export']
+
+        parse_anchors = 'parse_anchors' in request.form
+        include_markers = 'include_markers' in request.form
+        include_all_polylines = 'include_all_polylines' in request.form
+        generate_markers = 'generate_markers' in request.form
+
+        polyline_color = request.form['polyline_color']
+        marker_color = request.form['marker_color']
 
         if anchor1 == '' or anchor2 == '' or parse_anchors:
             for portal in json.loads(draw_tools_export):
@@ -42,7 +44,7 @@ def draw():
                     break
             parse_anchors = True
         field = FieldDrawer(anchor1, anchor2, draw_tools_export, include_markers, generate_markers, include_all_polylines, polyline_color, marker_color).generate()
-        return jsonify(result=field, anchor1=anchor1, anchor2=anchor2, parse_anchors=parse_anchors)
+        return jsonify(result=field, anchor1=anchor1, anchor2=anchor2, parse_anchors=parse_anchors, draw_tools_export=draw_tools_export)
 
 
 @app.route('/contact')

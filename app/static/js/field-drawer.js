@@ -1,3 +1,12 @@
+function writeHistory() {
+    $.each(localStorage, function(key, value) {
+        var history = JSON.parse(localStorage.getItem(key))
+        var key_name = key.replace(/( |\(|\(|\)|\+|:)/g, '')
+        $('#history').append('<a href="#' + key_name + '" class="btn btn-info" data-toggle="collapse">' + key + '</a></br/><br/>')
+        $('#history').append('<div id="' + key_name + '" class="collapse">' + history.result + '<br/><br/></div>')
+        console.log(JSON.parse(localStorage.getItem(key)))
+    });
+}
 $(document).ready(function() {
     $('form').submit(function (e) {
         var url = "/draw"; // send the form data here.
@@ -6,10 +15,19 @@ $(document).ready(function() {
             url: url,
             data: $('form').serialize(), // serializes the form's elements.
             success: function (data) {
-                $("#result").text(data.result),
-                $('#result-modal').modal('show'),
+                $("#result").text(data.result);
+                $('#result-modal').modal('show');
                 $("#anchor1").val(data.anchor1);
                 $("#anchor2").val(data.anchor2);
+                var store_me = { 'anchor1': data.anchor1,
+                                 'anchor2': data.anchor2,
+                                 'draw_tools_export': data.draw_tools_export,
+                                 'result': data.result
+                };
+                localStorage.setItem(Date(), JSON.stringify(store_me));
+                $('#history').html("");
+                writeHistory();
+
             },
             error: function(error){
                 console.log(error);
@@ -26,5 +44,5 @@ $(document).ready(function() {
         }
     });
     var clipboard = new Clipboard('.btn');
-
+    writeHistory()
 });
