@@ -5,7 +5,11 @@ function writeHistory() {
         $('#history').append('<a href="#' + key_name + '" class="btn btn-info" data-toggle="collapse">' + key + '</a>&nbsp;');
         $('#history').append('<a href="javascript:void(0)" onclick="drawFromHistory(\'' + key + '\');" class="btn btn-primary" data-toggle="collapse">Use</a>&nbsp;');
         $('#history').append('<a href="javascript:void(0)" onclick="deleteHistory(\'' + key + '\');" class="btn btn-danger">Remove</a></br/><br/>');
-        $('#history').append('<div id="' + key_name + '" class="collapse">' + history.result + '<br/><br/></div>');
+        $('#history').append('<div id="' + key_name + '" class="collapse"><b>Anchor 1: </b>' + history.anchor1 +
+            '<br/><b>Anchor 2: </b>' + history.anchor2 +
+            '<br/><b>Draw Tools Export: </b><br/>' + history.draw_tools_export +
+            '<br/><b>Result: </b><br/>' + history.result +
+            '<br/><br/></div>');
         console.log(JSON.parse(localStorage.getItem(key)))
     });
 }
