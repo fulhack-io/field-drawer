@@ -41,6 +41,7 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav" data-0="margin-top:20px;" data-300="margin-top:5px;">
                     <li><a href="#section-draw">Draw</a></li>
+                    <li><a href="#section-changelog">Changelog</a></li>
                     <li><a href="#section-contact">Contact</a></li>
                 </ul>
             </div><!--/.navbar-collapse -->
@@ -72,43 +73,43 @@
                 {% endfor %}
 
                 <form method="post" action="{{ url_for('index') }}" class="drawForm">
-                {{ form.csrf_token }}
+                    {{ form.csrf_token }}
                     <fieldset>
-                            {{ form.hidden_tag() }}
+                        {{ form.hidden_tag() }}
 
-                            {{ wtf.form_errors(form, hiddens="only") }}
-                            <div class="form-inline row">
-                                <div class="form-group col-md-6">
-                                    {{ form.anchor1.label }}
-                                    {{ form.anchor1(class="form-control") }}
-                                </div>
-                                <div class="form-group col-md-6">
-                                    {{ form.anchor2.label }}
-                                    {{ form.anchor2(class="form-control") }}
-                                </div>
+                        {{ wtf.form_errors(form, hiddens="only") }}
+                        <div class="form-inline row">
+                            <div class="form-group col-md-6">
+                                {{ form.anchor1.label }}
+                                {{ form.anchor1(class="form-control") }}
                             </div>
-                            {{ wtf.form_field(form.draw_tools_export) }}
+                            <div class="form-group col-md-6">
+                                {{ form.anchor2.label }}
+                                {{ form.anchor2(class="form-control") }}
+                            </div>
+                        </div>
+                        {{ wtf.form_field(form.draw_tools_export) }}
                         {{ wtf.form_field(form.parse_anchors) }}
                         {{ wtf.form_field(form.include_markers) }}
                         {{ wtf.form_field(form.include_all_polylines) }}
                         {{ wtf.form_field(form.generate_markers) }}
-                            <div class="form-inline row">
-                                <div class="form-group col-md-6">
-                                    {{ form.polyline_color.label }}
-                                    {{ form.polyline_color(class="form-control jscolor", value="C3545f") }}
-                                </div>
-                                <div class="form-group col-md-6">
-
-                                    {{ form.marker_color.label }}
-                                    {{ form.marker_color(class="form-control jscolor ", value="916BC3") }}
-                                </div>
+                        <div class="form-inline row">
+                            <div class="form-group col-md-6">
+                                {{ form.polyline_color.label }}
+                                {{ form.polyline_color(class="form-control jscolor", value="C3545f") }}
                             </div>
+                            <div class="form-group col-md-6">
 
-                            <input type="submit" class="btn btn-lg btn-primary" value="Generate"/>
+                                {{ form.marker_color.label }}
+                                {{ form.marker_color(class="form-control jscolor ", value="916BC3") }}
+                            </div>
+                        </div>
+
+                        <input type="submit" class="btn btn-lg btn-primary" value="Generate"/>
                     </fieldset>
                 </form>
             </div>
-        <br/>
+            <br/>
             <div id="history">
                 <span></span>
 
@@ -139,7 +140,7 @@
                 <div class="col-md-offset-2 col-md-8">
                     <div class="section-header">
                         <h2 class="section-heading animated" data-animation="bounceInUp">Changelog</h2>
-                        <p>2017-08-16 - Now storing generated results and input values in <a href="https://www.w3schools.com/html/html5_webstorage.asp" target="_blank">HTML Local Storage.</a></p>
+                        <p>2017-08-15 - Now storing generated results and input values in <a href="https://www.w3schools.com/html/html5_webstorage.asp" target="_blank">HTML Local Storage.</a></p>
                     </div>
                 </div>
             </div>
@@ -182,7 +183,6 @@
                     </div>
                 </div>
             </div>
-        </div>
         </div>
     </section>
     <a href="#header" class="scrollup"><i class="fa fa-chevron-up"></i></a>
