@@ -10,12 +10,11 @@ function writeHistory() {
             '<br/><b>Draw Tools Export: </b><br/>' + history.draw_tools_export +
             '<br/><b>Result: </b><br/>' + history.result +
             '<br/><br/></div>');
-        console.log(JSON.parse(localStorage.getItem(key)))
+        // console.log(JSON.parse(localStorage.getItem(key)))
     });
 }
 function deleteHistory(key) {
     localStorage.removeItem(key);
-    console.log(key);
     $('#history').html("");
     writeHistory();
 }
