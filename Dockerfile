@@ -1,4 +1,4 @@
-FROM tiangolo/uwsgi-nginx:python3.5
+FROM tiangolo/uwsgi-nginx:python3.7
 
 COPY ./requirements.txt /tmp/
 RUN pip install -r /tmp/requirements.txt && \
@@ -9,3 +9,4 @@ COPY nginx.conf /etc/nginx/conf.d/
 
 # Copy sample app
 COPY ./app /app
+RUN chown -Rv nginx:nginx /app
